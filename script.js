@@ -41,7 +41,8 @@
 // }
 
 // function showTime(a){
-//     document.getElementById('time').innerText = (`Время ${a.hours}:${a.minutes}:${a.seconds}`)
+//     document.getElementById('time').innerHTML = `Время 
+// ${String(a.hours).padStart(2,'0')}:${a.minutes.toString().padStart(2,'0')}:${a.seconds.toString().padStart(2,'0')}`
 // }
 
 // // showTime(time)
@@ -63,8 +64,24 @@
 //     showTime(time)
 // }
 
-// changeSeconds(200)
+// // changeSeconds(200)
 
+// function addSeconds(s) {
+//     const seconds = time.seconds + s
+//     const minutes = time.minutes + Math.floor(seconds/60) 
+//     const hours = time.hours + Math.floor(minutes/60)
+//     time.seconds = seconds%60
+//     time.minutes = minutes%60
+//     time.hours = hours%24
+//     showTime(time)
+// }
+// function addMinutes(m) {
+//     addSeconds(m*60)
+// }
+// function addHours(h) {
+//     addMinutes(h*60)
+// }
+// showTime(time)
 
 
 
@@ -81,12 +98,11 @@
 // console.log(degree(2,2))
 
 
-// function maxDivider(a,b){
-//     if( a = 1 || b = 1){
-//         return Math.min(a,b)
+// function maxDivider(a,b, div=Math.min(a,b)){
+//     if( a%div==0 && b%div==0 ){
+//         return div
 //     }else{
-//         let c = a % b
-//         return c = 0 ? b :maxDivider(b,c)
+//         return maxDivider(a,b, div-1)
 //     }
 // }
 
@@ -94,14 +110,146 @@
 
 
 
-// Написать функцию, которая принимает строку и выводит
-// статистику о ней: количество букв, количество цифр и
-// количество других знаков.
+// function maxNumber(num){
+//     if(num < 10){
+//         return num
+//     }else{
+//         return Math.max(num % 10,maxNumber(parseInt(num/10))) 
+//         Math.max(6,3,4,2,3) 
+//     }
+// }
+
+
+
+// console.log(maxNumber(32436))
+// console.log(Math.max(...String(32436).split('')))
+
+
+// function simpleNumber(n, a=n-1){
+//     if(a == 1){
+//         return true
+//     }else{
+//         return  n % a == 0 ? false : simpleNumber(n, a - 1)
+//     }
+// }
+// console.log(simpleNumber(2))
+
+// function allFactor(f,l = 2){
+//     if(l == 1){
+//         return f
+//     }else{
+//         const fac = 
+//     }
+// }
+
+
+
+class MyButton {
+    constructor(text,btnClass){
+        this.text = text
+        this.btnClass = btnClass
+    }
+    show(){
+        const btn = document.createElement('button')
+        btn.classList = (this.btnClass)
+        document.body.appendChild(btn)
+        btn.innerText = this.text
+    }
+    
+    get value(){
+        return this.text
+    }
+
+    set value(text){
+        this.text = text
+    }
+}
+
+let btn = new MyButton('Save Progress','btnClass')
+
+let btn1 = new MyButton('Click Me','btnClass1')
+
+let btn2 = new MyButton('Download','btnClass2')
+
+let btn3 = new MyButton('See more','btn btn2 v1')
+
+btn.show()
+
+btn1.show()
+
+btn2.show()
+
+btn3.show()
+
+class ColorButton extends MyButton{
+    constructor(text,btnClass,color){
+        super(text,btnClass)
+        this.color = color
+    }
+    show(){
+        const btn = document.createElement('button')
+        document.body.appendChild(btn)
+        btn.innerText = this.text
+        btn.classList.add(this.btnClass)
+        btn.classList.add(this.color)
+    }
+}
+
+let btn5 = new ColorButton('Save Progress','btn','danger')
+
+btn5.show()
+
+
+function addList(){
+    let addString
+
+    do{
+        addString = prompt('Добавить пункт в список:')
+        
+    }while(addString != '')
+   
+    let firstString = document.createElement('li')
+    
+    firstString.innerText += addString
+    
+    lister.prepend(firstString)
+    
+}
+
+
+
+
+function raplacingRegister(string){
+    let arr = string.split('')
+    
+    let result = []
+
+    for(let i = 0; i < arr.length;i++){
+        if(arr[i] === arr[i].toUpperCase()){
+            if(isNaN(arr[i]) == false && arr[i]!=' '){
+                result.push('_')
+            } else {
+                result.push(arr[i].toLowerCase())
+                
+            }  
+        }else if(arr[i] === arr[i].toLowerCase()){
+            result.push(arr[i].toUpperCase())
+        } 
+    }
+    console.log(result.join(''))
+}
+
+
+raplacingRegister('Ja123vaScript')
+
+
 
 function infoString(string){
     
-    numLetter = string.split(/[а-яa-z]/).length + 1    
+    numLetter = string.split(/[а-яА-Яa-zA-Z]/).length + 1    
     
+    console.log(string.split(/[а-яА-Яa-zA-Z]/))
+
     num = string.split(/[0-9]/).length - 1
     
     symbols = string.split(/[!@#$%^&*()-,.;:]/).length - 1
@@ -112,69 +260,4 @@ function infoString(string){
     console.log(symbols)
 }
 
-infoString('JavaScript')
-
-
-
-
-// Написать функцию, которая принимает двузначное число
-// и возвращает его в текстовом виде.
-
-function numbersIntoLetters(num){
-
-    numbeR = ['Один','Два','Три','Четыре','Пять','Шесть','Семь','Восемь','Девять']
-    
-    numberS = ['Десять','Одинадцать','Двенадцать','Тринадцать','Четырнадцать','Пятнадцать','Шестнадцать','Семнадцать','Восемнадцать','Девятнадцать']
-    
-    let result = num > 0 && num < 10 ? numbeR.at(num-1)
-                : num >= 10 && num < 20 ? numberS.at(num-10)
-                : num == 20 ? 'Двадцать'
-                : num > 20 && num < 30 ? 'Двадцать' + ' ' + numbeR.at(num-21) 
-                : num == 30 ? 'Тридцать'
-                : num > 30 && num < 40 ? 'Тридцать' + ' ' + numbeR.at(num-31)
-                : num == 40 ? 'Сорок' 
-                : num > 40 && num < 50 ? 'Сорок' + ' ' + numbeR.at(num-41)
-                : num == 50 ? 'Пятьдесят' 
-                : num > 50 && num < 60 ? 'Пятьдесят' + ' ' + numbeR.at(num-51)
-                : num == 60 ? 'Шестьдесят' 
-                : num > 60 && num < 70 ? 'Шестьдесят' + ' ' + numbeR.at(num-61)
-                : num == 70 ? 'Семьдесят' 
-                : num > 70 && num < 80 ? 'Семьдесят' + ' ' + numbeR.at(num-71)
-                : num == 80 ? 'Восемьдесят' 
-                : num > 80 && num < 90 ? 'Семьдесят' + ' ' + numbeR.at(num-81)
-                : num == 90 ? 'Девяносто' 
-                : num > 90 && num < 100 ? 'Семьдесят' + ' ' + numbeR.at(num-81)
-                : 'Большое не смогли?'
-
-    console.log(result)
-}
-
-numbersIntoLetters(78)
-
-
-// Написать функцию, которая заменяет в полученной строке
-// большие буквы на маленькие, маленькие – на большие, а
-// цифры – на знак нижнего подчеркивания.
-
-
-
-function raplacingRegister(string){
-    let arr = string.split('')
-
-    let result = []
-
-    for(let i = 0; i < arr.length;i++){
-        if(arr[i] === arr[i].toUpperCase()){
-            result.push(arr[i].toLowerCase())
-        }else if(arr[i] === arr[i].toLowerCase()){
-            result.push(arr[i].toUpperCase())
-        }else if(isNaN(arr[i]) = false){
-            
-            console.log(arr[i])
-        }    
-    }
-    console.log(result)
-}
-
-
-raplacingRegister('Ja123vaScript')
+infoString('J!a!vaS!!cript3423!4G!2П34')
